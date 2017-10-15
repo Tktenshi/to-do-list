@@ -7,20 +7,22 @@
     <link href="styles/to-do-list.css" rel="stylesheet">
 </head>
 <body>
-<article class = "list">
-    <h1 class = "list-h1">My Lovely To Do List</h1>
-    <div class = "list-img"></div>
-    <input class = "list-input" type="text" placeholder = "Create a task" tabindex="1" autofocus>
-    <img src="URL" alt="rfkt"> <input type="date" class = "list-input"> <button></button>
-    <label for="list-filter">Filter</label>
-    <select class="list-filter" id="list-filter">
+<article class="list">
+    <h1 class="list-h1">My Lovely To Do List</h1>
+    <div class="list-img"></div>
+    <input class="list-input" type="text" placeholder="Create a task" tabindex="1" autofocus>
+    <input type="date" class="list-input" tabindex="2">
+    <button class="list-button">Add Task</button>
+    <label for="list-filter">Filter: </label>
+    <select class="list-input list-filter" id="list-filter">
         <option>All</option>
         <option>Done</option>
         <option>Not done</option>
         <option>Tomorrow</option>
         <option>Week</option>
     </select>
-    <input type="checkbox"> <label for="exampleFormControlSelect1">Example select</label>
+    <input type="checkbox" id="list-check">
+    <label for="list-check">Example select</label>
     <table></table>
 </article>
 </body>

@@ -19,39 +19,69 @@ body {
 .list-h1 {
     font-family: 'Neucha', cursive;
     text-align: center;
+    /*color: #483D8B;*/
 }
 
 .list {
     width: 20rem;
     height: 35rem;
-    /*border: 2px solid black;*/
     margin: auto;
     padding: 10px 20px;
+    text-align: center;
     box-shadow: 0 0 53px 3px black;
 }
 
-.list-input{
-     display: inline-block;
-     margin: 7px 0;
-     background-color: transparent;
-     border: none;
-     border-bottom: 1px solid black;
-     text-align: center;
-     border-radius: 5px;
-     box-shadow: 0 9px 13px -9px black;
- }
-
-.list-input[type="text"]{
-    width: 100%;
+.list-button {
+    padding: 2px 21px;
+    margin: 7px 10px;
+    border-radius: 5px;
+    outline: none;
+    background: linear-gradient(to bottom, /*#9370DB,*/ #7B68EE, #6A5ACD, #483D8B);
+    color: #E6E6FF;
+    border: 1px solid #555555;
+    -webkit-transition-duration: 0.4s; /* Safari */
+    transition-duration: 0.4s;
+    box-shadow: 0 9px 13px -9px black;
 }
 
-.list-input[type="date"]{
+.list-button:hover {
+    box-shadow: 0 9px 19px -5px black;
+}
 
+.list-button:active {
+    background: linear-gradient(to top, /*#9370DB,*/ #7B68EE, #6A5ACD, #483D8B);
+}
+
+.list-input {
+    /*display: inline-block;*/
+    margin: 7px auto;
+    background-color: transparent;
+    border: none;
+    border-bottom: 1px solid black;
+    text-align: center;
+    border-radius: 5px;
+    box-shadow: 0 9px 13px -9px black;
+    -webkit-transition-duration: 0.4s; /* Safari */
+    transition-duration: 0.4s;
+}
+
+.list-input:hover {
+    box-shadow: 0 9px 19px -5px black;
 }
 
 .list-input:focus {
     outline: none;
     box-shadow: 0 9px 19px -5px black;
+}
+
+.list-input[type="text"] {
+    width: 100%;
+}
+
+.list-input[type="date"] {
+    padding-left: 1.5rem;
+    background: url('../img/calendar_2.png') no-repeat 6px center;
+    background-size: 1.9rem;
 }
 
 .list-img {
