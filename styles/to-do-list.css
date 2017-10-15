@@ -1,0 +1,64 @@
+@import url('https://fonts.googleapis.com/css?family=Droid+Sans:400,700|Neucha&subset=cyrillic');
+
+html, body {
+    font: 17px 'Droid Sans', Arial, sans-serif;
+    height: 100%;
+}
+
+body {
+    background: fixed url('../img/sky.jpg') no-repeat center center;
+    background-size: cover;
+    display: flex;
+    /*align-self:center;*/
+    /*align-items: center;*/
+    /*align-content: center;*/
+    /*justify-content: center;*/
+    /*vertical-align: middle;*/
+}
+
+.list-h1 {
+    font-family: 'Neucha', cursive;
+    text-align: center;
+}
+
+.list {
+    width: 20rem;
+    height: 35rem;
+    /*border: 2px solid black;*/
+    margin: auto;
+    padding: 10px 20px;
+    box-shadow: 0 0 53px 3px black;
+}
+
+.list-input{
+     display: inline-block;
+     margin: 7px 0;
+     background-color: transparent;
+     border: none;
+     border-bottom: 1px solid black;
+     text-align: center;
+     border-radius: 5px;
+     box-shadow: 0 9px 13px -9px black;
+ }
+
+.list-input[type="text"]{
+    width: 100%;
+}
+
+.list-input[type="date"]{
+
+}
+
+.list-input:focus {
+    outline: none;
+    box-shadow: 0 9px 19px -5px black;
+}
+
+.list-img {
+    margin: auto;
+    background: url('../img/sprite_cat.png') no-repeat;
+    background-size: cover;
+    height: 7.5rem;
+    width: 7.5rem;
+    margin-bottom: 8px;
+}
