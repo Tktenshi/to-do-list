@@ -8,22 +8,48 @@
 </head>
 <body>
 <article class="list">
-    <h1 class="list-h1">My Lovely To Do List</h1>
-    <div class="list-img"></div>
-    <input class="list-input" type="text" placeholder="Create a task" tabindex="1" autofocus>
-    <input type="date" class="list-input" tabindex="2">
-    <button class="list-button">Add Task</button>
-    <label for="list-filter">Filter: </label>
-    <select class="list-input list-filter" id="list-filter">
-        <option>All</option>
-        <option>Done</option>
-        <option>Not done</option>
-        <option>Tomorrow</option>
-        <option>Week</option>
-    </select>
-    <input type="checkbox" id="list-check">
-    <label for="list-check">Example select</label>
-    <table></table>
+    <h1 class="list_h1">My Lovely To Do List</h1>
+    <div class="list_img"></div>
+    <input class="list_input list_el" type="text" placeholder="Create a task" tabindex="1" autofocus>
+    <div>
+        <input type="date" placeholder="Due date" class="list_input list_el" tabindex="2">
+        <button class="list_button list_el">Add Task</button>
+    </div>
+    <span class="no-wrap">
+        <label for="list-filter">Filter: </label>
+        <select class="list_input list_el" id="list-filter">
+            <option>All</option>
+            <option>Done</option>
+            <option>Not done</option>
+            <option>Tomorrow</option>
+            <option>Week</option>
+        </select>
+    </span>
+    <span class="no-wrap">
+        <input type="checkbox" class="list_check" checked id="list-check">
+        <label for="list-check" class="list_el list_label-check"></label>
+        <label for="list-check">Show date field</label>
+    </span>
+    <table>
+        <tr>
+            <td>...</td>
+            <td>...</td>
+            <td>...</td>
+            <td>...</td>
+        </tr>
+        <tr>
+            <td>...</td>
+            <td>...</td>
+            <td>...</td>
+            <td>...</td>
+        </tr>
+        <tr>
+            <td>...</td>
+            <td>...</td>
+            <td>...</td>
+            <td>...</td>
+        </tr>
+    </table>
 </article>
 </body>
 </html>

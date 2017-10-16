@@ -16,7 +16,7 @@ body {
     /*vertical-align: middle;*/
 }
 
-.list-h1 {
+.list_h1 {
     font-family: 'Neucha', cursive;
     text-align: center;
     /*color: #483D8B;*/
@@ -31,64 +31,90 @@ body {
     box-shadow: 0 0 53px 3px black;
 }
 
-.list-button {
-    padding: 2px 21px;
-    margin: 7px 10px;
+.list_el {
     border-radius: 5px;
+    -webkit-transition-duration: 0.4s; /* Safari */
+    transition-duration: 0.4s;
+    box-shadow: 0 9px 13px -9px black;
+}
+
+.list_el:hover {
+    box-shadow: 0 9px 19px -5px black;
+}
+
+.list_button {
+    margin: 7px 10px;
+    padding: 2px 21px;
     outline: none;
     background: linear-gradient(to bottom, /*#9370DB,*/ #7B68EE, #6A5ACD, #483D8B);
     color: #E6E6FF;
     border: 1px solid #555555;
-    -webkit-transition-duration: 0.4s; /* Safari */
-    transition-duration: 0.4s;
-    box-shadow: 0 9px 13px -9px black;
 }
 
-.list-button:hover {
-    box-shadow: 0 9px 19px -5px black;
-}
-
-.list-button:active {
+.list_button:active {
     background: linear-gradient(to top, /*#9370DB,*/ #7B68EE, #6A5ACD, #483D8B);
 }
 
-.list-input {
-    /*display: inline-block;*/
-    margin: 7px auto;
+.list_input {
+    padding: 0;
+    margin: 10px auto;
     background-color: transparent;
     border: none;
     border-bottom: 1px solid black;
     text-align: center;
-    border-radius: 5px;
-    box-shadow: 0 9px 13px -9px black;
-    -webkit-transition-duration: 0.4s; /* Safari */
-    transition-duration: 0.4s;
 }
 
-.list-input:hover {
-    box-shadow: 0 9px 19px -5px black;
-}
-
-.list-input:focus {
+.list_input:focus {
     outline: none;
-    box-shadow: 0 9px 19px -5px black;
+    /*box-shadow: 0 9px 19px -5px black;*/
 }
 
-.list-input[type="text"] {
+.list_input[type="text"] {
     width: 100%;
 }
 
-.list-input[type="date"] {
+.list_input[type="date"] {
     padding-left: 1.5rem;
     background: url('../img/calendar_2.png') no-repeat 6px center;
     background-size: 1.9rem;
 }
 
-.list-img {
+.list_img {
     margin: auto;
     background: url('../img/sprite_cat.png') no-repeat;
     background-size: cover;
     height: 7.5rem;
     width: 7.5rem;
     margin-bottom: 8px;
+}
+
+.no-wrap {
+    white-space: nowrap;
+    margin: 7px 10px;
+}
+
+.list_check {
+    display: none;
+}
+
+.list_check + .list_label-check {
+    display: inline-block;
+    content: "";
+    vertical-align: middle;
+    height: 1.1rem;
+    width: 1.1rem;
+    line-height: 1.1rem;
+    margin: 0 0 4px 0;
+
+    background: linear-gradient(to bottom, /*#9370DB,*/ #7B68EE, #6A5ACD, #483D8B);
+    color: #E6E6FF;
+    border: 1px solid #555555;
+}
+
+.list_check:checked + .list_label-check:before {
+    content: "✔";
+}
+
+.list_check:hover + .list_label-check {
+    box-shadow: 0 9px 19px -5px black;
 }
