@@ -19,6 +19,7 @@ body {
 .list_h1 {
     font-family: 'Neucha', cursive;
     text-align: center;
+    margin: 0.5em 0 0.15em;
     /*color: #483D8B;*/
 }
 
@@ -85,7 +86,7 @@ body {
     background-size: cover;
     height: 7.5rem;
     width: 7.5rem;
-    margin-bottom: 8px;
+    margin-bottom: 1px;
 }
 
 .no-wrap {
@@ -117,4 +118,12 @@ body {
 
 .list_check:hover + .list_label-check {
     box-shadow: 0 9px 19px -5px black;
+}
+
+.list_table {
+    display: inline-block;
+    width: 100%;
+    margin: 10px auto;
+    border: 1px solid black;
+    overflow: auto;
 }
