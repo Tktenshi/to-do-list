@@ -1,4 +1,5 @@
 @import url('https://fonts.googleapis.com/css?family=Droid+Sans:400,700|Neucha&subset=cyrillic');
+/*@import url('https://fonts.googleapis.com/css?family=Droid+Sans|Neucha|Roboto&subset=cyrillic');*/
 
 html, body {
     font: 17px 'Droid Sans', Arial, sans-serif;
@@ -47,12 +48,24 @@ body {
     margin: 7px 10px;
     padding: 2px 21px;
     outline: none;
-    background: linear-gradient(to bottom, /*#9370DB,*/ #7B68EE, #6A5ACD, #483D8B);
-    color: #E6E6FF;
-    border: 1px solid #555555;
 }
 
 .list_button:active {
+    background: linear-gradient(to top, /*#9370DB,*/ #7B68EE, #6A5ACD, #483D8B);
+}
+
+.list_button--del {
+    outline: none;
+    border-radius: 15px;
+    -moz-padding-start: 6px;
+    -moz-padding-end: 6px;
+}
+
+.list_button--del:before {
+    content: 'X';
+}
+
+.list_button--del:active {
     background: linear-gradient(to top, /*#9370DB,*/ #7B68EE, #6A5ACD, #483D8B);
 }
 
@@ -105,7 +118,7 @@ body {
     height: 1.1rem;
     width: 1.1rem;
     line-height: 1.1rem;
-    margin: 0 0 4px 0;
+    margin: 0px 0 4px 0;
 
     background: linear-gradient(to bottom, /*#9370DB,*/ #7B68EE, #6A5ACD, #483D8B);
     color: #E6E6FF;
@@ -116,14 +129,67 @@ body {
     content: "✔";
 }
 
+/*.list_check:checked ~ label {*/
+    /*text-decoration: line-through;*/
+/*}*/
+
 .list_check:hover + .list_label-check {
     box-shadow: 0 9px 19px -5px black;
 }
 
+.list_table-container {
+    margin: 12px auto;
+    /*border: 1px solid red;*/
+    height: 42%;
+    overflow-y: auto;
+    overflow-x: hidden;
+}
+
 .list_table {
-    display: inline-block;
     width: 100%;
-    margin: 10px auto;
-    border: 1px solid black;
-    overflow: auto;
+    /*border: 1px solid black;*/
+    border-collapse: separate;
+    border-spacing: 0 6px;
+    margin-top: -6px;
+    font-size: 0.95rem;
+}
+
+.list_table-date {
+    font-size: 0.7rem;
+}
+
+.list_table tr:hover {
+    background-color: rgba(123, 104, 238, 0.4);
+    cursor: default;
+}
+
+.list_table-checkbox {
+    padding-left: 4px;
+    padding-top: 4px;
+}
+
+.list_table td {
+    border: 1px solid #696969;
+    border-left: none;
+    border-right: none;
+    /*padding: 0px 1px 0px 0px;*/
+    background-color: rgba(240, 240, 240, 0.4);
+}
+
+.list_table td:first-child {
+    border-left: 1px solid #696969;
+    border-top-left-radius: 20px;
+    border-bottom-left-radius: 20px;
+}
+
+.list_table td:last-child {
+    border-right: 1px solid #696969;
+    border-bottom-right-radius: 20px;
+    border-top-right-radius: 20px;
+}
+
+.violet {
+    background: linear-gradient(to bottom, /*#9370DB,*/ #7B68EE, #6A5ACD, #483D8B);
+    color: #E6E6FF;
+    border: 1px solid #555555;
 }

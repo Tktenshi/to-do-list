@@ -13,7 +13,7 @@
     <input class="list_input list_el" type="text" placeholder="Create a task" tabindex="1" autofocus>
     <div>
         <input type="date" placeholder="Due date" class="list_input list_el" tabindex="2">
-        <button class="list_button list_el">Add Task</button>
+        <button class="list_button list_el violet">Add Task</button>
     </div>
     <span class="no-wrap">
         <label for="list-filter">Filter: </label>
@@ -27,36 +27,37 @@
     </span>
     <span class="no-wrap">
         <input type="checkbox" class="list_check" checked id="list-check">
-        <label for="list-check" class="list_el list_label-check"></label>
+        <label for="list-check" class="list_el list_label-check violet"></label>
         <label for="list-check">Show date field</label>
     </span>
-    <table class="list_table">
-        <tr>
-            <td><input type="checkbox" class="list_check" id="0"><label for="0" class="list_el list_label-check"></label></td>
-            <td>Сделать домашкуСделать домашкуСделать домашкуСделать домашку</td>
-            <td>27.05.17</td>
-            <td>1</td>
-        </tr>
-        <tr>
-            <td><input type="checkbox" class="list_check" id="1"><label for="1" class="list_el list_label-check"></label></td>
-            <td>Сделать домашкуСделать домашкуСделать домашкуСделать домашку</td>
-            <td>07.08.17</td>
-            <td>...</td>
-        </tr>
-        <tr>
-            <td><input type="checkbox" class="list_check" id="2"><label for="2" class="list_el list_label-check"></label></td>
-            <td>Сделать домашкуСделать домашкуСделать домашкуСделать домашку</td>
-            <td></td>
-            <td>...</td>
-        </tr>
-        <tr>
-            <td><input type="checkbox" class="list_check" id="3"><label for="3" class="list_el list_label-check"></label></td>
-            <td>Сделать домашкуСделать домашкуСделать домашкуСделать домашкуСделать домашкуСделать домашкуСделать домашкуСделать домашкуСделать домашкуСделать домашку</td>
-            <td></td>
-            <td>...</td>
-        </tr>
-    </table>
-    <div>sdf</div>
+    <div class="list_table-container">
+        <table class="list_table">
+            <tr>
+                <td class="list_table-checkbox"><input type="checkbox" class="list_check" id="0"><label for="0"class="violet list_el list_label-check"></label></td>
+                <td>Сделать домашку машку</td>
+                <td class="list_table-date">27.05.17</td>
+                <td><button class="list_button--del list_el violet"></button></td>
+            </tr>
+            <tr>
+                <td class="list_table-checkbox"><input type="checkbox" class="list_check" id="1"><label for="1"class="violet list_el list_label-check"></label></td>
+                <td>Сделать домашку</td>
+                <td class="list_table-date">07.08.17</td>
+                <td><button class="list_button--del list_el violet"></button></td>
+            </tr>
+            <tr>
+                <td class="list_table-checkbox"><input type="checkbox" class="list_check" id="2"><label for="2"class="violet list_el list_label-check"></label></td>
+                <td>Сделать домашку</td>
+                <td class="list_table-date"></td>
+                <td><button class="list_button--del list_el violet"></button></td>
+            </tr>
+            <tr>
+                <td class="list_table-checkbox"><input type="checkbox" class="list_check" id="3"><label for="3"class="violet list_el list_label-check"></label></td>
+                <td>Сделать домашкуСделать домашку машкуСделать домашку машку</td>
+                <td class="list_table-date"></td>
+                <td><button class="list_button--del list_el violet"></button></td>
+            </tr>
+        </table>
+    </div>
 </article>
 </body>
 </html>
