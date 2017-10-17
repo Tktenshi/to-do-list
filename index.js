@@ -45,8 +45,14 @@ line2.appendChild(btnAddTask);
 var noWrap = createEl("span", "no-wrap");
 article.appendChild(noWrap);
 
-var lblFilter = createEl("label", "", "Filter", {for:"list-filter"});
-var selFilter = createEl("select", "list_input list_el", "", {id:"list-filter"});
+var lblFilter = createEl("label", "", "Filter", {for: "list-filter"});
+var selFilter = createEl("select", "list_input list_el", "", {id: "list-filter"});
 noWrap.appendChild(lblFilter);
 noWrap.appendChild(selFilter);
+
+for (var i = 0; i < filterList.length; i++) {
+    var option = createEl("option", "", filterList[i]);
+    selFilter.appendChild(option);
+}
+
 
