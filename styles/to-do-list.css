@@ -10,11 +10,6 @@ body {
     background: fixed url('../img/sky.jpg') no-repeat center center;
     background-size: cover;
     display: flex;
-    /*align-self:center;*/
-    /*align-items: center;*/
-    /*align-content: center;*/
-    /*justify-content: center;*/
-    /*vertical-align: middle;*/
 }
 
 .list_h1 {
