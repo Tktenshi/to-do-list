@@ -15,7 +15,7 @@ body {
 .list_h1 {
     font-family: 'Neucha', cursive;
     text-align: center;
-    margin: 0.5em 0 0.15em;
+    margin: 0.4em 0 0.25em;
     /*color: #483D8B;*/
 }
 
@@ -95,11 +95,19 @@ body {
     height: 7.5rem;
     width: 7.5rem;
     margin-bottom: 1px;
+    -webkit-transition-duration: 0.4s; /* Safari */
+    transition-duration: 0.4s;
 }
 
 .no-wrap {
     white-space: nowrap;
     margin: 7px 10px;
+}
+
+.wrap-word {
+    /*word-wrap: break-word;*/
+    /*overflow-wrap: break-word;*/
+    word-break: break-all;
 }
 
 .list_check {
@@ -123,10 +131,6 @@ body {
 .list_check:checked + .list_label-check:before {
     content: "✔";
 }
-
-/*.list_check:checked ~ label {*/
-    /*text-decoration: line-through;*/
-/*}*/
 
 .list_check:hover + .list_label-check {
     box-shadow: 0 9px 19px -5px black;
@@ -187,4 +191,35 @@ body {
     background: linear-gradient(to bottom, /*#9370DB,*/ #7B68EE, #6A5ACD, #483D8B);
     color: #E6E6FF;
     border: 1px solid #555555;
+}
+
+.line-through {
+    text-decoration: line-through;
+}
+
+.error--img {
+    background-position: -130px 0;
+    /*background-position: -255px 0;*/
+    /*background-position: -1148px 0;*/
+}
+
+.error--input::-webkit-input-placeholder {
+    color: red;
+}
+
+.error--input::-moz-placeholder {
+    color: red;
+}
+
+.error--input:-moz-placeholder {
+    color: red;
+}
+
+.error--input:-ms-input-placeholder {
+    color: red;
+}
+
+.error--input {
+    border-bottom-color: red;
+    box-shadow: 0 9px 13px -9px red;
 }
