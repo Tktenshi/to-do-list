@@ -20,6 +20,11 @@ body {
 }
 
 .list {
+    display: flex;
+    display: -ms-flexbox;
+    -webkit-flex-direction: column;
+    -ms-flex-direction: column;
+    flex-direction: column;
     width: 20rem;
     height: 35rem;
     margin: auto;
@@ -108,6 +113,9 @@ body {
     /*word-wrap: break-word;*/
     /*overflow-wrap: break-word;*/
     word-break: break-all;
+    /*-webkit-hyphens: auto;*/
+    /*-moz-hyphens: auto;*/
+    /*-ms-hyphens: auto;*/
 }
 
 .list_check {

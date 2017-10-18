@@ -1,17 +1,8 @@
 var filterList = ["All", "Done", "Not done", "Tomorrow", "Week"];
-// var taskList = [
-//     {done: false, text: "Сделать домашку ", date: "18.10.2017"},
-//     {done: true, text: "Сделать домашку", date: "07.08.17"},
-//     {done: false, text: "Сделать домашку машку Сделать домашк дом", date: ""},
-//     {done: false, text: "Сделать домашкуу", date: "19.10.2017"},
-//     {done: true, text: "test test test test test test test test", date: "26.10.2017"}
-// ];
+// var taskList = [];
 var taskList = [
-    {done: false, text: "0", date: "18.10.2017"},
-    {done: true, text: "1", date: "07.08.17"},
-    {done: false, text: "2", date: ""},
-    {done: false, text: "3", date: "19.10.2017"},
-    {done: true, text: "4", date: "26.10.2017"}
+    {done: true, text: "Написать крутой ToDoList", date: "18.10.2017"},
+    {done: false, text: "Узнать рекомендации по проделанной работе", date: ""}
 ];
 var showDate = true;
 
@@ -31,16 +22,23 @@ function createEl(tagName, parent, className, innerHTML, attributes) {
 }
 
 var article = createEl("article", main, "list");
-createEl("h1", article, "list_h1", "My Lovely To Do List");
-var img = createEl("div", article, "list_img");
-var inpCreateTask = createEl("input", article, "list_input list_el", null, {
+var container = createEl("div", article);
+createEl("h1", container, "list_h1", "My Lovely To Do List");
+var img = createEl("div", container, "list_img");
+
+var inpCreateTask = createEl("input", container, "list_input list_el", null, {
     type: "text",
     placeholder: "Create a task",
     tabindex: "1",
     autofocus: "autofocus"
 });
+inpCreateTask.onkeypress = clickAddEl;
 
-var line2 = createEl("div", article);
+function clickAddEl(event) {
+    event.keyCode === 13 && btnAddTaskClick();
+}
+
+var line2 = createEl("div", container);
 var inpCreateDate = createEl("input", line2, "list_input list_el", "18.10.2017", {
     type: "date",
     placeholder: "Due date",
@@ -49,11 +47,11 @@ var inpCreateDate = createEl("input", line2, "list_input list_el", "18.10.2017",
 var flag;
 if (inpCreateDate.valueAsDate === undefined) {
     flag = true;
-    inpCreateDate.value = new Date().toLocaleDateString();
+    inpCreateDate.value = getDateString();
 }
 inpCreateDate.valueAsDate = new Date();
 
-createEl("button", line2, "list_button list_el violet", "Add Task").onclick = function () {
+var btnAddTaskClick = createEl("button", line2, "list_button list_el violet", "Add Task").onclick = function () {
     inpCreateTask.focus();
     if (inpCreateTask.value === "") {
         img.classList.add('error--img');
@@ -62,9 +60,9 @@ createEl("button", line2, "list_button list_el violet", "Add Task").onclick = fu
     }
     img.classList.remove('error--img');
     inpCreateTask.classList.remove('error--input');
-    var duedate = flag ? inpCreateDate.value : inpCreateDate.valueAsDate ? inpCreateDate.valueAsDate.toLocaleDateString() : "";
+    var duedate = flag ? inpCreateDate.value : inpCreateDate.valueAsDate ? getDateString(inpCreateDate.valueAsDate) : "";
     taskList.push({done: false, text: inpCreateTask.value, date: duedate});
-    // if (selFilter.value === filterList[0] || switchFilter([taskList[taskList.length - 1]]).length !== 0)
+
     addRow(taskList.length - 1);
     if (selFilter.value !== filterList[0])
         selFilter.onchange();
@@ -72,7 +70,7 @@ createEl("button", line2, "list_button list_el violet", "Add Task").onclick = fu
     tableCont.scrollTop = tableCont.scrollHeight;
 };
 
-var noWrap1 = createEl("span", article, "no-wrap");
+var noWrap1 = createEl("span", container, "no-wrap");
 createEl("label", noWrap1, null, "Filter: ", {for: "list-filter"});
 
 var selFilter = createEl("select", noWrap1, "list_input list_el", null, {id: "list-filter"});
@@ -127,9 +125,9 @@ function getDateString(date) {
     return date.getDate() + "." + (date.getMonth() + 1) + "." + date.getFullYear();
 }
 
-/////////////////////////////ВСТАВИТЬ ТУТ ПРОБЕЛ
+noWrap1.outerHTML = noWrap1.outerHTML + " ";
 
-var noWrap2 = createEl("span", article, "no-wrap");
+var noWrap2 = createEl("span", container, "no-wrap");
 var chbShowDate = createEl("input", noWrap2, "list_check", null, {
     id: "list-check",
     type: "checkbox"
@@ -154,17 +152,12 @@ for (var m = 0; m < taskList.length; m++) {
 function addRow(k, list) {
     list = list || taskList;
     var row = createEl("tr", table, list[k].done && "line-through");
-    row.onclick = function () {
-        // window.el = this;
-        // console.log(this.rowIndex);
-    };
     var td1 = createEl("td", row, "list_table-checkbox");
     var chb = createEl("input", td1, "list_check", null, {type: "checkbox", id: k});
     chb.checked = list[k].done;
     chb.onchange = function () {
         var index = this.parentElement.parentNode.rowIndex;
         table.rows[index].classList.toggle('line-through');
-        // debugger;
         list[index].done = !list[index].done;
         if (selFilter.value === filterList[1] || selFilter.value === filterList[2])
             selFilter.onchange();
@@ -172,7 +165,8 @@ function addRow(k, list) {
     createEl("label", td1, "violet list_el list_label-check", null, {for: k});
 
     createEl("td", row, "wrap-word", list[k].text);
-    createEl("td", row, "list_table-date", list[k].date).style.display = showDate ? "" : "none";
+    var strDate = list[k].date.slice(0, 6) + list[k].date.slice(8);
+    createEl("td", row, "list_table-date", strDate).style.display = showDate ? "" : "none";
     createEl("button", createEl("td", row), "list_button--del list_el violet").onclick = function () {
         var index = this.parentElement.parentNode.rowIndex;
         table.removeChild(table.rows[index]);
@@ -180,7 +174,3 @@ function addRow(k, list) {
         taskList.splice(delI, 1);
     };
 }
-
-
-// el.classList.toggle('line-through');
-// el.classList.add('myCssClass');
