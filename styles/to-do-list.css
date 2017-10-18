@@ -1,17 +1,6 @@
 @import url('https://fonts.googleapis.com/css?family=Droid+Sans:400,700|Neucha&subset=cyrillic');
 /*@import url('https://fonts.googleapis.com/css?family=Droid+Sans|Neucha|Roboto&subset=cyrillic');*/
 
-html, body {
-    font: 17px 'Droid Sans', Arial, sans-serif;
-    height: 100%;
-}
-
-body {
-    background: fixed url('../img/sky.jpg') no-repeat center center;
-    background-size: cover;
-    display: flex;
-}
-
 .list_h1 {
     font-family: 'Neucha', cursive;
     text-align: center;
@@ -89,13 +78,13 @@ body {
 
 .list_input[type="date"] {
     padding-left: 1.5rem;
-    background: url('../img/calendar_2.png') no-repeat 6px center;
+    background: url('https://tktenshi.github.io/to-do-list/img/calendar_2.png') no-repeat 6px center;
     background-size: 1.9rem;
 }
 
 .list_img {
     margin: auto;
-    background: url('../img/sprite_cat.png') no-repeat;
+    background: url('https://tktenshi.github.io/to-do-list/img/sprite_cat.png') no-repeat;
     background-size: cover;
     height: 7.5rem;
     width: 7.5rem;
