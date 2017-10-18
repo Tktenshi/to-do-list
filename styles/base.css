@@ -1,0 +1,10 @@
+html, body {
+    font: 17px 'Droid Sans', Arial, sans-serif;
+    height: 100%;
+}
+
+body {
+    background: fixed url('../img/sky.jpg') no-repeat center center;
+    background-size: cover;
+    display: flex;
+}

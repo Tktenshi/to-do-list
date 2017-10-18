@@ -1,12 +1,12 @@
 var MODULE = (function () {
 
     var cont = null;
-    var style = null;
+    var link = null;
 
     return {
-        destroy: function(){
-            main.parentElement.removeChild(main);
-            style.parentElement.removeChild(style);
+        destroy: function () {
+            cont && main.parentElement.removeChild(main);
+            link && link.parentElement.removeChild(link);
         },
         init: function (main) {
             cont = main;
@@ -14,9 +14,13 @@ var MODULE = (function () {
             // var taskList = [];
             var taskList = [
                 {done: true, text: "Написать крутой ToDoList", date: "18.10.2017"},
-                {done: false, text: "Узнать рекомендации по работе", date: ""}
+                {done: false, text: "Получить рекомендации", date: ""}
             ];
             var showDate = true;
+
+            function randomId() {
+                return Math.random().toString(36).substr(2, 9);
+            }
 
             function createEl(tagName, parent, className, innerHTML, attributes) {
                 var newEl = document.createElement(tagName);
@@ -121,9 +125,9 @@ var MODULE = (function () {
             };
 
             var noWrap1 = createEl("span", container, "no-wrap");
-            createEl("label", noWrap1, null, "Filter: ", {for: "list-filter"});
-
-            var selFilter = createEl("select", noWrap1, "list_input list_el", null, {id: "list-filter"});
+            var selFilterId = randomId();
+            createEl("label", noWrap1, null, "Filter: ", {for: selFilterId});
+            var selFilter = createEl("select", noWrap1, "list_input list_el", null, {id: selFilterId});
             for (var i = 0; i < filterList.length; i++) {
                 var option = createEl("option", selFilter, null, filterList[i]);
             }
@@ -136,11 +140,13 @@ var MODULE = (function () {
                 }
             };
 
-            //noWrap1.outerHTML = noWrap1.outerHTML + " ";
+            createEl("span", container).outerHTML += " ";
+            // noWrap1.outerHTML += " ";
 
             var noWrap2 = createEl("span", container, "no-wrap");
+            var chbShowDateId = randomId();
             var chbShowDate = createEl("input", noWrap2, "list_check", null, {
-                id: "list-check",
+                id: chbShowDateId,
                 type: "checkbox"
             });
             chbShowDate.checked = showDate;
@@ -150,8 +156,8 @@ var MODULE = (function () {
                 }
                 showDate = !showDate;
             };
-            createEl("label", noWrap2, "list_el list_label-check violet", null, {for: "list-check"});
-            createEl("label", noWrap2, null, " Show date field", {for: "list-check"});
+            createEl("label", noWrap2, "list_el list_label-check violet", null, {for: chbShowDateId});
+            createEl("label", noWrap2, null, " Show date field", {for: chbShowDateId});
 
             var tableCont = createEl("div", article, "list_table-container");
             var table = createEl("table", tableCont, "list_table");
@@ -164,7 +170,8 @@ var MODULE = (function () {
                 list = list || taskList;
                 var row = createEl("tr", table, list[k].done && "line-through");
                 var td1 = createEl("td", row, "list_table-checkbox");
-                var chb = createEl("input", td1, "list_check", null, {type: "checkbox", id: k});
+                var chbId = randomId();
+                var chb = createEl("input", td1, "list_check", null, {type: "checkbox", id: chbId+k});
                 chb.checked = list[k].done;
                 chb.onchange = function () {
                     var index = this.parentElement.parentNode.rowIndex;
@@ -173,7 +180,7 @@ var MODULE = (function () {
                     if (selFilter.value === filterList[1] || selFilter.value === filterList[2])
                         selFilter.onchange();
                 };
-                createEl("label", td1, "violet list_el list_label-check", null, {for: k});
+                createEl("label", td1, "violet list_el list_label-check", null, {for: chbId+k});
 
                 createEl("td", row, "wrap-word", list[k].text);
                 var strDate = list[k].date.slice(0, 6) + list[k].date.slice(8);
@@ -185,6 +192,14 @@ var MODULE = (function () {
                     taskList.splice(delI, 1);
                 };
             }
+
+            this.loadStyles();
+        },
+        loadStyles: function () {
+            link = document.createElement("link");
+            link.setAttribute("rel", "stylesheet");
+            link.setAttribute("href", "https://tktenshi.github.io/to-do-list/styles/to-do-list.css");
+            document.querySelector("head").appendChild(link);
         }
     }
 })();
