@@ -3,13 +3,6 @@ var MODULE = (function () {
     var cont = null;
     var link = null;
 
-    var filterList = ["All", "Done", "Not done", "Tomorrow", "Week"];
-    var taskList = [
-        {done: true, text: "Написать крутой ToDoList", date: "18.10.2017"},
-        {done: false, text: "Получить рекомендации", date: ""}
-    ];
-    var showDate = true;
-
     return {
         destroy: function () {
             cont && main.parentElement.removeChild(main);
@@ -17,6 +10,17 @@ var MODULE = (function () {
         },
         init: function (main) {
             cont = main;
+            var filterList = ["All", "Done", "Not done", "Tomorrow", "Week"];
+            // var taskList = [];
+            var taskList = [
+                {done: true, text: "Написать крутой ToDoList", date: "18.10.2017"},
+                {done: false, text: "Получить рекомендации", date: ""}
+            ];
+            var showDate = true;
+
+            function randomId() {
+                return Math.random().toString(36).substr(2, 9);
+            }
 
             function createEl(tagName, parent, className, innerHTML, attributes) {
                 var newEl = document.createElement(tagName);
@@ -31,118 +35,8 @@ var MODULE = (function () {
                 return newEl;
             }
 
-            var article = createEl("article", null, "list");
-            var container = createEl("div", article);
-            createEl("h1", container, "list_h1", "My Lovely To Do List");
-            var img = createEl("div", container, "list_img");
-            var inpCreateTask = createEl("input", container, "list_input list_el", null, {
-                type: "text",
-                placeholder: "Create a task",
-                tabindex: "1",
-                autofocus: "autofocus"
-            });
-            inpCreateTask.onkeypress = clickAddEl;
-            var line2 = createEl("div", container);
-            var inpCreateDate = createEl("input", line2, "list_input list_el", "18.10.2017", {
-                type: "date",
-                placeholder: "Due date",
-                tabindex: "2"
-            });
-            var flag;
-            if (inpCreateDate.valueAsDate === undefined) {
-                flag = true;
-                inpCreateDate.value = getDateString();
-            }
-            inpCreateDate.valueAsDate = new Date();
-
-            var btnAddTaskClick = createEl("button", line2, "list_button list_el violet", "Add Task").onclick = function () {
-                inpCreateTask.focus();
-                if (inpCreateTask.value === "") {
-                    img.classList.add('error--img');
-                    inpCreateTask.classList.add('error--input');
-                    return;
-                }
-                img.classList.remove('error--img');
-                inpCreateTask.classList.remove('error--input');
-                var duedate = flag ? inpCreateDate.value : inpCreateDate.valueAsDate ? getDateString(inpCreateDate.valueAsDate) : "";
-                taskList.push({done: false, text: inpCreateTask.value, date: duedate});
-
-                // addRow(taskList.length - 1);
-                // if (selFilter.value !== filterList[0])
-                selFilter.onchange();
-                inpCreateTask.value = "";
-                tableCont.scrollTop = tableCont.scrollHeight;
-            };
-
-            var noWrap1 = createEl("span", container, "no-wrap");
-            var selFilterId = randomId();
-            createEl("label", noWrap1, null, "Filter: ", {for: selFilterId});
-            var selFilter = createEl("select", noWrap1, "list_input list_el", null, {id: selFilterId});
-            for (var i = 0; i < filterList.length; i++) {
-                createEl("option", selFilter, null, filterList[i]);
-            }
-            selFilter.onchange = function () {
-                tableCont.removeChild(table);
-                var filter = switchFilter(taskList, this.value) || taskList;
-                table = createEl("table", null, "list_table");
-                // table = createEl("table", tableCont, "list_table");
-                for (var i = 0; i < filter.length; i++) {
-                    addRow(i, filter);
-                }
-                tableCont.appendChild(table);
-            };
-
-            createEl("span", container).outerHTML += " ";
-            // noWrap1.outerHTML += " ";
-
-            var noWrap2 = createEl("span", container, "no-wrap");
-            var chbShowDateId = randomId();
-            var chbShowDate = createEl("input", noWrap2, "list_check", null, {
-                id: chbShowDateId,
-                type: "checkbox"
-            });
-            chbShowDate.checked = showDate;
-            chbShowDate.onchange = function () {
-                for (var l = 0; l < table.rows.length; l++) {
-                    table.rows[l].cells[2].style.display = this.checked ? "" : "none";
-                }
-                showDate = !showDate;
-            };
-            createEl("label", noWrap2, "list_el list_label-check violet", null, {for: chbShowDateId});
-            createEl("label", noWrap2, null, " Show date field", {for: chbShowDateId});
-
-            var tableCont = createEl("div", article, "list_table-container");
-            var table = createEl("table", tableCont, "list_table");
-            for (var m = 0; m < taskList.length; m++) {
-                addRow(m);
-            }
-            // tableCont.appendChild(table);
-
-            function addRow(k, list) {
-                list = list || taskList;
-                var row = createEl("tr", table, list[k].done && "line-through");
-                var td1 = createEl("td", row, "list_table-checkbox");
-                var chbId = randomId();
-                var chb = createEl("input", td1, "list_check", null, {type: "checkbox", id: chbId + k});
-                chb.checked = list[k].done;
-                chb.onchange = function () {
-                    var index = this.parentElement.parentNode.rowIndex;
-                    table.rows[index].classList.toggle('line-through');
-                    list[index].done = !list[index].done;
-                    if (selFilter.value === filterList[1] || selFilter.value === filterList[2])
-                        selFilter.onchange();
-                };
-                createEl("label", td1, "violet list_el list_label-check", null, {for: chbId + k});
-
-                createEl("td", row, "wrap-word", list[k].text);
-                var strDate = list[k].date.slice(0, 6) + list[k].date.slice(8);
-                createEl("td", row, "list_table-date", strDate).style.display = showDate ? "" : "none";
-                createEl("button", createEl("td", row), "list_button--del list_el violet").onclick = function () {
-                    var index = this.parentElement.parentNode.rowIndex;
-                    table.removeChild(table.rows[index]);
-                    var delI = taskList.indexOf(list[index]);
-                    taskList.splice(delI, 1);
-                };
+            function clickAddEl(event) {
+                event.keyCode === 13 && btnAddTaskClick();
             }
 
             function switchFilter(elem, value) {
@@ -179,20 +73,125 @@ var MODULE = (function () {
                 }
             }
 
-            function clickAddEl(event) {
-                event.keyCode === 13 && btnAddTaskClick();
-            }
-
             function getDateString(date) {
                 date = date || new Date();
                 return date.getDate() + "." + (date.getMonth() + 1) + "." + date.getFullYear();
             }
 
-            function randomId() {
-                return Math.random().toString(36).substr(2, 9);
+            var article = createEl("article", main, "list");
+            var container = createEl("div", article);
+            createEl("h1", container, "list_h1", "My Lovely To Do List");
+            var img = createEl("div", container, "list_img");
+
+            var inpCreateTask = createEl("input", container, "list_input list_el", null, {
+                type: "text",
+                placeholder: "Create a task",
+                tabindex: "1",
+                autofocus: "autofocus"
+            });
+            inpCreateTask.onkeypress = clickAddEl;
+
+
+            var line2 = createEl("div", container);
+            var inpCreateDate = createEl("input", line2, "list_input list_el", "18.10.2017", {
+                type: "date",
+                placeholder: "Due date",
+                tabindex: "2"
+            });
+            var flag;
+            if (inpCreateDate.valueAsDate === undefined) {
+                flag = true;
+                inpCreateDate.value = getDateString();
+            }
+            inpCreateDate.valueAsDate = new Date();
+
+            var btnAddTaskClick = createEl("button", line2, "list_button list_el violet", "Add Task").onclick = function () {
+                inpCreateTask.focus();
+                if (inpCreateTask.value === "") {
+                    img.classList.add('error--img');
+                    inpCreateTask.classList.add('error--input');
+                    return;
+                }
+                img.classList.remove('error--img');
+                inpCreateTask.classList.remove('error--input');
+                var duedate = flag ? inpCreateDate.value : inpCreateDate.valueAsDate ? getDateString(inpCreateDate.valueAsDate) : "";
+                taskList.push({done: false, text: inpCreateTask.value, date: duedate});
+
+                addRow(taskList.length - 1);
+                if (selFilter.value !== filterList[0])
+                    selFilter.onchange();
+                inpCreateTask.value = "";
+                tableCont.scrollTop = tableCont.scrollHeight;
+            };
+
+            var noWrap1 = createEl("span", container, "no-wrap");
+            var selFilterId = randomId();
+            createEl("label", noWrap1, null, "Filter: ", {for: selFilterId});
+            var selFilter = createEl("select", noWrap1, "list_input list_el", null, {id: selFilterId});
+            for (var i = 0; i < filterList.length; i++) {
+                var option = createEl("option", selFilter, null, filterList[i]);
+            }
+            selFilter.onchange = function () {
+                tableCont.removeChild(table);
+                var filter = switchFilter(taskList, this.value) || taskList;
+                table = createEl("table", tableCont, "list_table");
+                for (var i = 0; i < filter.length; i++) {
+                    addRow(i, filter);
+                }
+            };
+
+            createEl("span", container).outerHTML += " ";
+            // noWrap1.outerHTML += " ";
+
+            var noWrap2 = createEl("span", container, "no-wrap");
+            var chbShowDateId = randomId();
+            var chbShowDate = createEl("input", noWrap2, "list_check", null, {
+                id: chbShowDateId,
+                type: "checkbox"
+            });
+            chbShowDate.checked = showDate;
+            chbShowDate.onchange = function () {
+                for (var l = 0; l < table.rows.length; l++) {
+                    table.rows[l].cells[2].style.display = this.checked ? "" : "none";
+                }
+                showDate = !showDate;
+            };
+            createEl("label", noWrap2, "list_el list_label-check violet", null, {for: chbShowDateId});
+            createEl("label", noWrap2, null, " Show date field", {for: chbShowDateId});
+
+            var tableCont = createEl("div", article, "list_table-container");
+            var table = createEl("table", tableCont, "list_table");
+
+            for (var m = 0; m < taskList.length; m++) {
+                addRow(m);
             }
 
-            main.appendChild(article);
+            function addRow(k, list) {
+                list = list || taskList;
+                var row = createEl("tr", table, list[k].done && "line-through");
+                var td1 = createEl("td", row, "list_table-checkbox");
+                var chbId = randomId();
+                var chb = createEl("input", td1, "list_check", null, {type: "checkbox", id: chbId+k});
+                chb.checked = list[k].done;
+                chb.onchange = function () {
+                    var index = this.parentElement.parentNode.rowIndex;
+                    table.rows[index].classList.toggle('line-through');
+                    list[index].done = !list[index].done;
+                    if (selFilter.value === filterList[1] || selFilter.value === filterList[2])
+                        selFilter.onchange();
+                };
+                createEl("label", td1, "violet list_el list_label-check", null, {for: chbId+k});
+
+                createEl("td", row, "wrap-word", list[k].text);
+                var strDate = list[k].date.slice(0, 6) + list[k].date.slice(8);
+                createEl("td", row, "list_table-date", strDate).style.display = showDate ? "" : "none";
+                createEl("button", createEl("td", row), "list_button--del list_el violet").onclick = function () {
+                    var index = this.parentElement.parentNode.rowIndex;
+                    table.removeChild(table.rows[index]);
+                    var delI = taskList.indexOf(list[index]);
+                    taskList.splice(delI, 1);
+                };
+            }
 
             this.loadStyles();
         },
